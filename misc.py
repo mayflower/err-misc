@@ -18,7 +18,8 @@ class Misc(BotPlugin):
             "Ahoi {}"
         ]
 
-        return random.choice(hellos).format(msg.frm.nick)
+        if not self.bot_identifier.nick == msg.frm.nick:
+            return random.choice(hellos).format(msg.frm.nick)
 
     @re_botcmd(pattern=r'(^(good )?m(a|o)(rn)?ing?)', prefixed=False, flags=re.IGNORECASE)
     def morning(self, msg, args):
@@ -31,7 +32,8 @@ class Misc(BotPlugin):
             "Moin {}"
         ]
 
-        return random.choice(mornings).format(msg.frm.nick)
+        if not self.bot_identifier.nick == msg.frm.nick:
+            return random.choice(mornings).format(msg.frm.nick)
 
     @re_botcmd(pattern=r'announce "(.*)"')
     def announce(self, msg, match):
