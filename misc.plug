@@ -1,0 +1,12 @@
+[Core]
+module = misc
+name = misc
+
+[Documentation]
+description = Misc small commands
+
+[Python]
+version = 3
+
+[Errbot]
+
