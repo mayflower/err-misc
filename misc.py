@@ -1,7 +1,7 @@
 import random
 import re
 
-from errbot import BotPlugin, re_botcmd
+from errbot import BotPlugin, re_botcmd, webhook
 
 
 class Misc(BotPlugin):
@@ -112,3 +112,8 @@ class Misc(BotPlugin):
             ]
 
             self.send(message.frm.room if hasattr(message.frm, 'room') else message.frm, random.choice(phrases))
+
+
+    @webhook('/', methods=('GET',), raw=True)
+    def receive(self, request):
+        pass
