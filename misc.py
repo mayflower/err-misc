@@ -47,12 +47,12 @@ class Misc(BotPlugin):
                 "Thank you very much for your support and we'll get back to you very soon."
             )
 
-    @re_botcmd(pattern=r'announce "(.*)"')
+    @re_botcmd(pattern=r'ANNOUNCE "(.*)"', prefixed=False)
     def announce(self, msg, match):
         for room in self.rooms():
             self.send(room, match.group(1))
 
-    @re_botcmd(pattern=r'announce downtime for "(.*)" starting (.*)')
+    @re_botcmd(pattern=r'ANNOUNCE downtime for "(.*)" starting (.*)', prefixed=False)
     def announce_downtime(self, msg, match):
         user = msg.frm.nick
         room = msg.frm.room if hasattr(msg.frm, 'room') else None
@@ -67,7 +67,7 @@ class Misc(BotPlugin):
         for room in self.rooms():
             self.send(room, message)
 
-    @re_botcmd(pattern=r'announce downtime complete for "(.*)"')
+    @re_botcmd(pattern=r'ANNOUNCE downtime complete for "(.*)"', prefixed=False)
     def announce_up(self, msg, match):
         service = match.group(1)
         message = "Maintenance for the '{}' service is complete.".format(service)
