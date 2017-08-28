@@ -5,36 +5,6 @@ from errbot import BotPlugin, re_botcmd, webhook
 
 
 class Misc(BotPlugin):
-    @re_botcmd(pattern=r'^(ser(vu)?s|hi(ya)?|hallo|hello|good( [d\'])?ay(e)?|aho(i|j)) ', prefixed=False, flags=re.IGNORECASE)
-    def hello(self, msg, args):
-        '''Hello'''
-        hellos = [
-            "Well hello there, {}",
-            "Hey {}, Hello!",
-            "Marnin', {}",
-            "Good day, {}",
-            "Good 'aye!, {}",
-            "Servus {}",
-            "Ahoi {}"
-        ]
-
-        if not self.bot_identifier.nick == msg.frm.nick:
-            return random.choice(hellos).format(msg.frm.nick)
-
-    @re_botcmd(pattern=r'(^(good )?m(a|o)(rn)?ing?) ', prefixed=False, flags=re.IGNORECASE)
-    def morning(self, msg, args):
-        '''Good morning'''
-        mornings = [
-            "Good morning, {}",
-            "Good morning to you too, {}",
-            "Good day, {}",
-            "Good 'aye!, {}",
-            "Moin {}"
-        ]
-
-        if not self.bot_identifier.nick == msg.frm.nick:
-            return random.choice(mornings).format(msg.frm.nick)
-
     @re_botcmd(pattern=r'ticket.*\?', prefixed=False, flags=re.IGNORECASE)
     def ticket(self, msg, args):
         '''Should I open a ticket?'''
