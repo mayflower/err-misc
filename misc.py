@@ -20,7 +20,8 @@ class Misc(BotPlugin):
     @re_botcmd(pattern=r'ANNOUNCE "(.*)"', prefixed=False)
     def announce(self, msg, match):
         for room in self.rooms():
-            self.send(room, match.group(1))
+            if self.to_be_announced(room):
+                self.send(room, match.group(1))
 
     @re_botcmd(pattern=r'ANNOUNCE downtime for "(.*)" starting (.*)', prefixed=False)
     def announce_downtime(self, msg, match):
@@ -35,7 +36,8 @@ class Misc(BotPlugin):
         ).format(service, start_time, user, room)
 
         for room in self.rooms():
-            self.send(room, message)
+            if self.to_be_announced(room):
+                self.send(room, message)
 
     @re_botcmd(pattern=r'ANNOUNCE downtime complete for "(.*)"', prefixed=False)
     def announce_up(self, msg, match):
@@ -43,7 +45,8 @@ class Misc(BotPlugin):
         message = "Maintenance for the '{}' service is complete.".format(service)
 
         for room in self.rooms():
-            self.send(room, message)
+            if self.to_be_announced(room):
+                self.send(room, message)
 
     def callback_message(self, message):
         self.log.debug(message.body == '{}?'.format(self._bot.bot_config.CHATROOM_FN))
@@ -99,3 +102,7 @@ class Misc(BotPlugin):
     @webhook('/', methods=('GET',), raw=True)
     def receive(self, request):
         pass
+
+    def to_be_announced(self, room):
+        "Returns true if ANNOUUNCEMENT_ROOMS isn't specified or true for the specified rooms"
+        return (not hasattr(self._bot.bot_config, 'ANNOUNCEMENT_ROOMS')) or str(room) in self._bot.bot_config.ANNOUNCEMENT_ROOMS
