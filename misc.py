@@ -104,5 +104,5 @@ class Misc(BotPlugin):
         pass
 
     def to_be_announced(self, room):
-        "Returns true if ANNOUUNCEMENT_ROOMS isn't specified or true for the specified rooms"
-        return (not hasattr(self._bot.bot_config, 'ANNOUNCEMENT_ROOMS')) or str(room) in self._bot.bot_config.ANNOUNCEMENT_ROOMS
+        "Returns true if ANNOUNCEMENT_ROOMS isn't specified or true for the specified rooms"
+        return str(room) in getattr(self._bot.bot_config, 'ANNOUNCEMENT_ROOMS', [])
