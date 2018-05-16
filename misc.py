@@ -5,18 +5,6 @@ from errbot import BotPlugin, re_botcmd, webhook
 
 
 class Misc(BotPlugin):
-    @re_botcmd(pattern=r'ticket.*\?', prefixed=False, flags=re.IGNORECASE)
-    def ticket(self, msg, args):
-        '''Should I open a ticket?'''
-        if hasattr(msg.frm, 'room') and (str(msg.frm.room) == 'administrator@conference.mayflower.de' or \
-            str(msg.frm.room) == '#administrator'):
-
-            return (
-                "Hi, thanks for asking for support, we are definitely happy to help.\nBut...\nOne thing...\n"
-                "Could you open an issue for us by either mailing administrator@mayflower.de or visiting https://jira.mayflower.de/secure/CreateIssue!default.jspa?pid=10000\n"
-                "Thank you very much for your support and we'll get back to you very soon."
-            )
-
     @re_botcmd(pattern=r'ANNOUNCE "(.*)"', prefixed=False)
     def announce(self, msg, match):
         for room in self.rooms():
